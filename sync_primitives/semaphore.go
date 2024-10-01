@@ -1,4 +1,4 @@
-package sync_promitives
+package sync_primitives
 
 import "sync"
 
