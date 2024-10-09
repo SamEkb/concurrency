@@ -1,7 +1,7 @@
 package chan_patterns
 
-func filter(inputChan <-chan int, predicate func(int) bool) <-chan int {
-	outputChan := make(chan int)
+func filter[T any](inputChan <-chan T, predicate func(T) bool) <-chan T {
+	outputChan := make(chan T)
 
 	go func() {
 		defer close(outputChan)
