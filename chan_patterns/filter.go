@@ -1,12 +1,12 @@
 package chan_patterns
 
-func filter(inputChan <-chan int) <-chan int {
+func filter(inputChan <-chan int, predicate func(int) bool) <-chan int {
 	outputChan := make(chan int)
 
 	go func() {
 		defer close(outputChan)
 		for value := range inputChan {
-			if value%2 == 0 && value > 0 {
+			if predicate(value) {
 				outputChan <- value
 			}
 		}
@@ -25,7 +25,9 @@ func filter(inputChan <-chan int) <-chan int {
 //		}
 //	}()
 //
-//	for value := range filter(ch) {
+//	for value := range filter(ch, func(i int) bool {
+//		return i%2 == 0 && i > 0
+//	}) {
 //		fmt.Println(value)
 //	}
 //}
