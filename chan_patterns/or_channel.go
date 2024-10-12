@@ -1,4 +1,4 @@
-package main
+package chan_patterns
 
 import (
 	"fmt"
